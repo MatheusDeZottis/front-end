@@ -3,23 +3,24 @@ const tbody = document.querySelector('tbody')
 const sNome = document.querySelector('#m-nome')
 const sFuncao = document.querySelector('#m-funcao')
 const sSalario = document.querySelector('#m-salario')
-const btnsalvar = document.querySelector('btnSalvae')
-let itens
-let id
+const btnsalvar = document.querySelector('#brnsalvar') 
 
-function openModal(edir = false, index = 0) {
+let itens = []
+let id;
+
+function openModal(edit = false, index = 0) {
     modal.classList.add('active')
 
     modal.onclick = e => {
         if (e.target.className.indexOf('modal-container') !== -1) {
-            modal.classList.remove('active')
+            modal.classList.remove('active');
         }
-    }
+    };
     if (edit) {
-        sNome.value = itens[index].none
+        sNome.value = itens[index].nome
         sFuncao.value = itens[index].funcao
         sSalario.value = itens[index].salario
-        id = index
+        id = index;
     } else {
         sNome.value = ''
         sFuncao.value = ''
@@ -33,44 +34,38 @@ function editItem(index) {
 
 function deleteItem(index) {
     itens.splice(index, 1)
-    seltItensBD()
-    loaditens()
+    setItensBD()
+    loadItens()
 }
 
 function insertItem(item, index) {
     let tr = document.createElement('tr')
     
     tr.innerHTML = `
-     <td>&{item.nome}</td>
-     <td>&{item.funcao}</td>
-     <td>&{item.salario}</td>
+     <td>${item.nome}</td>
+     <td>${item.funcao}</td>
+     <td>${item.salario}</td>
      <td class="acao">
-      <button onclick="editItem(${index})"><i class='bx bx-edit' ></button>
+      <button onclick="editItem(${index})"><i class='bx bx-edit'></i></button>
     </td>
-     <td class='bx bx-edit'></i></button>
-     
-
-    <td class="acao">
-      <button onclick="deleteItem(${index})"><i class='bx bx-trash'></i>< button>
+     <td class="acao">
+      <button onclick="deleteItem(${index})"><i class='bx bx-trash'></i></button>
     </td>
-     `
+     `;
     tbody.appendChild(tr)
 }
 
 btnsalvar.onclick = e => {
+    e.preventDefault()
 
-    if (sNome.value == '' || sFuncao.value == '' || sSalario.value == '') {
+    if (sNome.value === '' || sFuncao.value === '' || sSalario.value === '') {
         return
     }
-
-
-    e.preventDefault();
 
     if (id !== undefined) {
         itens[id].nome = sNome.value
         itens[id].funcao = sFuncao.value
         itens[id].salario = sSalario.value
-
     } else {
         itens.push({ 'nome': sNome.value, 'funcao': sFuncao.value, 'salario': sSalario.value })
     }
@@ -78,23 +73,20 @@ btnsalvar.onclick = e => {
     setItensBD()
 
     modal.classList.remove('active')
-    loaditens()
+    loadItens()
     id = undefined
+};
 
-}
-
-function loaditens() {
+function loadItens() {
     itens = getItensBD()
-    tbody.innerHTML = ''
+    tbody.innerHTML = '';
     itens.forEach((item, index) => {
         insertItem(item, index)
-    })
+    });
 }
 
-const getItensBD = () => JSON.parse(localStorage.getItem('dbfunc')) ?? []
+const getItensBD = () => JSON.parse(localStorage.getItem('dbfunc')) || []; // Corrigido
 
 const setItensBD = () => localStorage.setItem('dbfunc', JSON.stringify(itens))
 
-loaditens()
-
-
+loadItens()

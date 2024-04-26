@@ -5,63 +5,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crud</title>
     <link rel="stylesheet" href="style.css">
-    <link  href="https//unpkg.com/boxicons@2.1.1/css/boxicons.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css" rel="stylesheet">
 </head>
 
 <body>
     <div class="container">
-    <div class="header">
-        <span> Cadrasto de funcionários</span>
-        <button onclick="openModal()" id="new"> Incluir</i></button>
-    </div>
+        <div class="header">
+            <span> Cadastro de funcionários</span>
+            <button onclick="openModal()" id="new">  <i>Incluir</i></button>
+        </div>
 
-    <div class="divtable">
-        <table>
-            <thead>
-            <tr>
-                <th>Nome</th>
-                <th>Função</th>
-                <th> Salário</th>
-                <th>matricula</th>
-                <th class="acao"> Editar</th>
-                <th class="acao"> Excluir</th>
+        <div class="divTable">
+            <table>
+                <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Função</th>
+                    <th>Salário</th>
+                    <th>Matrícula</th>
+                    <th class="acao">Editar</th>
+                    <th class="acao">Excluir</th>
+                </tr>
+                </thead>
+                <tbody>
 
-            </tr>
-
-            </thead>
-            <tbody>
-
-            </tbody>
-
-        </table>
+                </tbody>
+            </table>
         </div>
         <div class="modal-container">
             <div class="modal">
                 <form>
-
                     <label for="m-nome">Nome</label>
-                    <input  id="m-funcao" type="text" required>
+                    <input id="m-nome" type="text" required>
 
                     <label for="m-funcao">Função</label>
-                    <input  id="m-funcao" type="text" required>
+                    <input id="m-funcao" type="text" required>
                      
-                    <label for="m-matricula">matricula</label>
-                    <input  id="m-matricula" type="number" required>
+                    <label for="m-matricula">Matrícula</label>
+                    <input id="m-matricula" type="number" required>
 
                     <label for="m-salario">Salário</label>
-                    <input  id="m-salario" type="text" required>
+                    <input id="m-salario" type="text" required>
                     <button id="brnsalvar">Salvar</button>
-
                 </form>
-
-                </div>
-                </div>
-
-                <script src="script.js"></script>
-
-
-                              
-                </form>
-    
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
 </body>
 </html>
