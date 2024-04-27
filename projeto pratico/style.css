@@ -209,7 +209,7 @@ tbody tr td.acao {
 td button {
     border: none;
     outline: none;
-    background: transparentz;
+    background: transparent;
 }
 
 td button i {
