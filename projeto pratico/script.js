@@ -5,7 +5,7 @@ const sFuncao = document.querySelector('#m-funcao')
 const sSalario = document.querySelector('#m-salario')
 const btnsalvar = document.querySelector('#brnsalvar') 
 
-let itens = [ z]
+let itens = []
 let id;
 
 function openModal(edit = false, index = 0) {
