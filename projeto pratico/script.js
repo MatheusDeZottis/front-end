@@ -1,46 +1,45 @@
-const modal = document.querySelector('.modal-container');
-const tbody = document.querySelector('tbody');
-const sNome = document.querySelector('#m-nome'); 
-const sFuncao = document.querySelector('#m-funcao');
-const sSalario = document.querySelector('#m-salario');
-const btnsalvar = document.querySelector('#btnsalvar');
+const modal = document.querySelector('.modal-container')
+const tbody = document.querySelector('tbody')
+const sNome = document.querySelector('#m-nome') 
+const sFuncao = document.querySelector('#m-funcao')
+const sSalario = document.querySelector('#m-salario')
+const btnsalvar = document.querySelector('#brnsalvar') 
 
-let itens = [];
+let itens = [ z]
 let id;
 
 function openModal(edit = false, index = 0) {
-    modal.classList.add('active');
-    id = undefined; // Defina id como undefined ao abrir o modal
-    
+    modal.classList.add('active')
+
     modal.onclick = e => {
         if (e.target.className.indexOf('modal-container') !== -1) {
             modal.classList.remove('active');
         }
     };
     if (edit) {
-        sNome.value = itens[index].nome;
-        sFuncao.value = itens[index].funcao;
-        sSalario.value = itens[index].salario;
-        id = index; // Atribua o index a id se estiver editando
+        sNome.value = itens[index].nome
+        sFuncao.value = itens[index].funcao
+        sSalario.value = itens[index].salario
+        id = index;
     } else {
-        sNome.value = '';
-        sFuncao.value = '';
-        sSalario.value = '';
+        sNome.value = ''
+        sFuncao.value = ''
+        sSalario.value = ''
     }
 }
 
 function editItem(index) {
-    openModal(true, index);
+    openModal(true, index)
 }
 
 function deleteItem(index) {
-    itens.splice(index, 1);
-    setItensBD();
-    loadItens();
+    itens.splice(index, 1)
+    setItensBD()
+    loadItens()
 }
 
 function insertItem(item, index) {
-    let tr = document.createElement('tr');
+    let tr = document.createElement('tr')
     
     tr.innerHTML = `
      <td>${item.nome}</td>
@@ -53,40 +52,41 @@ function insertItem(item, index) {
       <button onclick="deleteItem(${index})"><i class='bx bx-trash'></i></button>
     </td>
      `;
-    tbody.appendChild(tr);
+    tbody.appendChild(tr)
 }
 
 btnsalvar.onclick = e => {
-    e.preventDefault();
+    e.preventDefault()
 
     if (sNome.value === '' || sFuncao.value === '' || sSalario.value === '') {
-        return;
+        return
     }
 
     if (id !== undefined) {
-        itens[id].nome = sNome.value;
-        itens[id].funcao = sFuncao.value;
-        itens[id].salario = sSalario.value;
+        itens[id].nome = sNome.value
+        itens[id].funcao = sFuncao.value
+        itens[id].salario = sSalario.value
     } else {
-        itens.push({ 'nome': sNome.value, 'funcao': sFuncao.value, 'salario': sSalario.value });
+        itens.push({ 'nome': sNome.value, 'funcao': sFuncao.value, 'salario': sSalario.value })
     }
 
-    setItensBD();
+    setItensBD()
 
-    modal.classList.remove('active');
-    loadItens();
+    modal.classList.remove('active')
+    loadItens()
+    id = undefined
 };
 
 function loadItens() {
-    itens = getItensBD();
-    tbody.innerHTML = ''; // Limpar tbody antes de adicionar novos itens
+    itens = getItensBD()
+    tbody.innerHTML = '';
     itens.forEach((item, index) => {
-        insertItem(item, index);
+        insertItem(item, index)
     });
 }
 
-const getItensBD = () => JSON.parse(localStorage.getItem('dbfunc')) || [];
+const getItensBD = () => JSON.parse(localStorage.getItem('dbfunc')) || []; // Corrigido
 
-const setItensBD = () => localStorage.setItem('dbfunc', JSON.stringify(itens));
+const setItensBD = () => localStorage.setItem('dbfunc', JSON.stringify(itens))
 
-loadItens();
+loadItens()
